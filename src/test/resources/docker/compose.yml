@@ -15,8 +15,6 @@ services:
   user_redis:
     image: redis
     container_name: user_redis
-    volumes:
-      - user_data:/data
     ports:
       - "6379"
   user_service:
@@ -24,10 +22,10 @@ services:
       - user_mysql
       - user_redis
     build: .
-    image: user-service
+    image: user_service
     container_name: user_service
     ports:
-      - "80:80"
+      - "10086:80"
     environment:
       MYSQL_HOST: user_mysql
       MYSQL_PORT: 3306
