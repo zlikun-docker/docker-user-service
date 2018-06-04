@@ -12,17 +12,9 @@ services:
       MYSQL_PASSWORD: user
     ports:
       - "3306"
-  user_redis:
-    image: redis
-    container_name: user_redis
-    volumes:
-      - user_data:/data
-    ports:
-      - "6379"
   user_service:
     depends_on:
       - user_mysql
-      - user_redis
     build: .
     image: user-service
     container_name: user_service
@@ -33,7 +25,5 @@ services:
       MYSQL_PORT: 3306
       MYSQL_USERNAME: user
       MYSQL_PASSWORD: user
-      REDIS_HOST: user_redis
-      REDIS_PORT: 6379
 volumes:
   user_data:
