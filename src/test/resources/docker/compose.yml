@@ -1,17 +1,5 @@
 version: "3"
 services:
-  user_mysql:
-    image: mysql
-    container_name: user_mysql
-    volumes:
-      - user_data:/var/lib/mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: 123456
-      MYSQL_DATABASE: user
-      MYSQL_USER: user
-      MYSQL_PASSWORD: user
-    ports:
-      - "3306"
   user_redis:
     image: redis
     container_name: user_redis
@@ -19,7 +7,6 @@ services:
       - "6379"
   user_service:
     depends_on:
-      - user_mysql
       - user_redis
     build: .
     image: user_service
@@ -27,11 +14,5 @@ services:
     ports:
       - "10086:80"
     environment:
-      MYSQL_HOST: user_mysql
-      MYSQL_PORT: 3306
-      MYSQL_USERNAME: user
-      MYSQL_PASSWORD: user
       REDIS_HOST: user_redis
       REDIS_PORT: 6379
-volumes:
-  user_data:
