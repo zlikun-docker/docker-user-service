@@ -1,7 +1,10 @@
 version: "3"
 services:
   user_mysql:
-    image: mysql
+    build:
+      context: .
+      dockerfile: mysql_dockerfile
+    image: user_mysql
     container_name: user_mysql
     volumes:
       - user_data:/var/lib/mysql

@@ -1,0 +1,6 @@
+FROM mysql:latest
+MAINTAINER zlikun <zlikun-dev@hotmail.com>
+
+ENV UPDATED_AT 2018/06/04
+
+COPY mysql-init.sql /docker-entrypoint-initdb.d
